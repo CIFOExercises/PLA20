@@ -22,9 +22,11 @@ export class TodoService {
     return this.httpClient.post<Todo>(`${this.basePath}/todos`, todo);
   }
 
-  updateTodo(todo: Todo) {
-    return this.httpClient.put<Todo>(`${this.basePath}/todos`, todo);
+  updateTodo(todo: Todo): Observable<Todo> {
+    return this.httpClient.put<Todo>(`${this.basePath}/todos/${todo.id}`, todo);
   }
 
-  deleteTodo(id: string) {}
+  deleteTodo(id: string): Observable<void> {
+    return this.httpClient.delete<void>(`${this.basePath}/todos/${id}`);
+  }
 }
